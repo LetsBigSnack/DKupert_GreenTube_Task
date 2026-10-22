@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promo Uplift — KAM Guide</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500&display=swap">
+  <style>
+    /* Layout: single-column document with a tight type scale */
+    :root {
+      --bg:        #F8F9FA;
+      --bg-card:   #FFFFFF;
+      --fg:        #1A1D23;
+      --fg-muted:  #6B7280;
+      --border:    #E5E7EB;
+      --accent:    #059669;
+      --accent-bg: #ECFDF5;
+      --red:       #DC2626;
+      --red-bg:    #FEF2F2;
+      --amber:     #D97706;
+      --amber-bg:  #FFFBEB;
+      --tag-bg:    #EFF6FF;
+      --tag-fg:    #1D4ED8;
+
+      --f-head: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --f-body: 'Inter', system-ui, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:        #111318;
+        --bg-card:   #1C1F27;
+        --fg:        #E9EAEC;
+        --fg-muted:  #8B919E;
+        --border:    #2D3140;
+        --accent:    #10B981;
+        --accent-bg: #064E3B;
+        --red:       #F87171;
+        --red-bg:    #450A0A;
+        --amber:     #FCD34D;
+        --amber-bg:  #451A03;
+        --tag-bg:    #1E2A4A;
+        --tag-fg:    #93C5FD;
+        color-scheme: dark;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--f-body);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 36px max(16px, 24px);
+    }
+    .header-inner { max-width: 720px; margin-inline: auto; }
+
+    .eyebrow {
+      font-family: var(--f-head);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-family: var(--f-head);
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 700;
+      line-height: 1.2;
+      text-wrap: balance;
+      color: var(--fg);
+      margin-bottom: 10px;
+    }
+    .subtitle { color: var(--fg-muted); font-size: 15px; max-width: 54ch; }
+
+    .content {
+      max-width: 720px;
+      margin-inline: auto;
+      padding: 48px max(16px, 24px);
+      display: flex;
+      flex-direction: column;
+      gap: 44px;
+    }
+
+    section { display: flex; flex-direction: column; gap: 14px; }
+
+    h2 {
+      font-family: var(--f-head);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--fg);
+      text-wrap: balance;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+
+    p { max-width: 66ch; }
+
+    .uplift-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .uplift-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .uplift-card .badge { font-family: var(--f-head); font-size: 22px; font-weight: 700; }
+    .uplift-card.pos .badge { color: var(--accent); }
+    .uplift-card.neg .badge { color: var(--red); }
+    .uplift-card.na  .badge { color: var(--fg-muted); }
+    .uplift-card .label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--fg-muted);
+    }
+    .uplift-card .desc { font-size: 13px; color: var(--fg-muted); line-height: 1.5; }
+
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      min-width: 0;
+      background: var(--bg-card);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    th {
+      font-family: var(--f-head);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      text-align: left;
+      padding: 8px 14px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      color: var(--fg);
+    }
+    tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: var(--bg); }
+    td:first-child {
+      font-family: var(--f-head);
+      font-weight: 600;
+      font-size: 13px;
+      white-space: nowrap;
+      color: var(--fg);
+      width: 130px;
+    }
+    td.note { color: var(--fg-muted); font-size: 13px; }
+
+    .callout {
+      border-radius: 10px;
+      padding: 16px 18px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .callout.amber { background: var(--amber-bg); border: 1px solid var(--amber); }
+    .callout.green { background: var(--accent-bg); border: 1px solid var(--accent); }
+    .callout .icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .callout .body { display: flex; flex-direction: column; gap: 4px; }
+    .callout .body strong { font-family: var(--f-head); font-weight: 600; font-size: 13.5px; color: var(--fg); }
+    .callout .body p { font-size: 13.5px; color: var(--fg); max-width: none; }
+
+    .reason-list { display: flex; flex-direction: column; gap: 10px; }
+    .reason {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .reason .tag {
+      display: inline-block;
+      background: var(--tag-bg);
+      color: var(--tag-fg);
+      font-family: var(--f-head);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+      width: fit-content;
+      margin-bottom: 4px;
+    }
+    .reason p { font-size: 13.5px; color: var(--fg-muted); max-width: none; }
+
+    .tips { display: flex; flex-direction: column; gap: 10px; }
+    .tip {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .tip-num {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--f-head);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .tip p { font-size: 13.5px; max-width: none; }
+    .tip strong { font-weight: 600; color: var(--fg); }
+
+    .caveat-list { display: flex; flex-direction: column; gap: 8px; }
+    .caveat {
+      padding-left: 16px;
+      border-left: 3px solid var(--border);
+      font-size: 13.5px;
+      color: var(--fg-muted);
+    }
+    .caveat strong { color: var(--fg); font-weight: 600; }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 28px max(16px, 24px);
+      max-width: 720px;
+      margin-inline: auto;
+      color: var(--fg-muted);
+      font-size: 12.5px;
+    }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="eyebrow">GreenTube · Key Account Management</div>
+    <h1>Promo Uplift Dashboard</h1>
+    <p class="subtitle">A plain-language guide to reading your promotion results — no technical knowledge required.</p>
+  </div>
+</div>
+
+<div class="content">
+
+  <section>
+    <h2>What does this tool do?</h2>
+    <p>When you run a promotion on a casino site, the big question is: <strong>did it actually move stakes?</strong></p>
+    <p>This dashboard gives you that answer for every promotion in one place. For each promo, it takes the total stakes wagered <em>during</em> the promotion and compares them to the same number of days <em>immediately before</em> it started — at the same site, for the same games. The percentage difference is the <strong>uplift</strong>.</p>
+  </section>
+
+  <section>
+    <h2>Understanding uplift</h2>
+    <p>Uplift tells you whether stakes went up or down during the promotion, relative to the period just before it.</p>
+    <div class="uplift-grid">
+      <div class="uplift-card pos">
+        <span class="badge">+32.1%</span>
+        <span class="label">Positive</span>
+        <span class="desc">Stakes were 32% higher during the promo than in the comparison window. The promotion worked.</span>
+      </div>
+      <div class="uplift-card neg">
+        <span class="badge">−21.4%</span>
+        <span class="label">Negative</span>
+        <span class="desc">Stakes were lower during the promo. The promotion may not have had the intended effect.</span>
+      </div>
+      <div class="uplift-card na">
+        <span class="badge">N/A</span>
+        <span class="label">Unmeasurable</span>
+        <span class="desc">The result can't be calculated reliably. See the N/A section below for why.</span>
+      </div>
+    </div>
+    <p>The <strong>Impact (€)</strong> column shows the same result in euros — the raw euro difference between during and before. Use this number when reporting business impact to management; a percentage alone loses context without knowing the size of the baseline.</p>
+  </section>
+
+  <section>
+    <h2>Column reference</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Column</th><th>What it shows</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Promo</td><td class="note">The promo ID from your records, e.g. P01</td></tr>
+          <tr><td>Site</td><td class="note">The casino site where the promotion ran</td></tr>
+          <tr><td>Games</td><td class="note">Which games were included. <strong>ALL games</strong> means every game at that site was part of the promo</td></tr>
+          <tr><td>Days</td><td class="note">How many days the promotion ran</td></tr>
+          <tr><td>Before (€)</td><td class="note">Total stakes in the same number of days <em>immediately before</em> the promo started — this is the baseline the uplift is measured against</td></tr>
+          <tr><td>During (€)</td><td class="note">Total stakes during the promotion itself</td></tr>
+          <tr><td>Impact (€)</td><td class="note">During minus Before, in euros. Green means a gain; red means a loss. Use this in reports to management</td></tr>
+          <tr><td>Uplift</td><td class="note">The percentage change: (During − Before) ÷ Before × 100. Green is positive, red is negative, grey is N/A</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>The ⚠ warning icon</h2>
+    <div class="callout amber">
+      <span class="icon">⚠</span>
+      <div class="body">
+        <strong>Low baseline — treat with caution</strong>
+        <p>If you see a small warning icon next to a Before (€) figure, it means the baseline was under €5,000. A large uplift percentage on a small baseline can be misleading. Going from €500 to €5,000 is a +900% uplift on paper, but it may simply be normal day-to-day variation. These results are real numbers — but present them carefully and provide context before including them in a report.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What does N/A mean?</h2>
+    <p>Some promotions cannot be fairly measured. When you see <strong>N/A</strong> in the Uplift column, the text below the badge explains why. Common reasons:</p>
+    <div class="reason-list">
+      <div class="reason">
+        <span class="tag">Data entry error</span>
+        <p>"End date is before start date" — the promotion end date appears to be entered incorrectly in the system. The data team needs to correct the entry before this can be calculated.</p>
+      </div>
+      <div class="reason">
+        <span class="tag">No baseline data</span>
+        <p>"No stakes in the baseline period" — there were no recorded stakes for those games at that site in the comparison window. Without a baseline, there is nothing to compare against.</p>
+      </div>
+    </div>
+    <p style="margin-top:4px">Unmeasurable promos are <strong>hidden by default</strong> so they don't clutter your view. Use the <em>"show N unmeasurable"</em> link above the table to make them visible when you need to investigate them.</p>
+  </section>
+
+  <section>
+    <h2>Filtering and sorting</h2>
+    <div class="tips">
+      <div class="tip">
+        <span class="tip-num">1</span>
+        <p><strong>Search box</strong> — type any part of a promo ID, site name, or game name. The table filters instantly as you type.</p>
+      </div>
+      <div class="tip">
+        <span class="tip-num">2</span>
+        <p><strong>Column headers are sortable</strong> — click any column header to sort by that column. Click again to reverse the order. The table opens sorted by Uplift (highest first) so your best-performing promos are always at the top.</p>
+      </div>
+      <div class="tip">
+        <span class="tip-num">3</span>
+        <p><strong>Show/hide unmeasurable</strong> — use the link above the table to toggle promos that can't be measured. They're hidden by default to keep your view clean.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Things to keep in mind</h2>
+    <div class="caveat-list">
+      <div class="caveat">
+        <strong>The baseline matches the promo length.</strong> A 7-day promo is compared to the 7 days immediately before it; a 14-day promo to the 14 days before it. The comparison period always ends the day before the promo started.
+      </div>
+      <div class="caveat">
+        <strong>Comparisons are site-and-game specific.</strong> A promo on Golden Fox at Casino Alpha is only compared to Golden Fox at Casino Alpha — not to other games or other sites.
+      </div>
+      <div class="caveat">
+        <strong>Seasonality is not adjusted for.</strong> If the promo ran over a public holiday and the baseline was all normal weekdays, the comparison may overstate the effect. Use your judgement when the timing looks unusual.
+      </div>
+      <div class="caveat">
+        <strong>Overlapping promos are not flagged automatically.</strong> If two promos ran close together at the same site, the baseline of the second one may include activity from the first. Check the dates manually in those cases.
+      </div>
+    </div>
+    <div class="callout green" style="margin-top:4px">
+      <span class="icon">💡</span>
+      <div class="body">
+        <strong>Tip for reporting</strong>
+        <p>Sort by Impact (€) descending to find the promos that moved the most money — not just the highest percentage. A +15% uplift on a €200k baseline is a much bigger story than a +200% uplift on a €500 one.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="footer">
+  GreenTube KAM Dashboard · For technical details see the <a href="../README.md">repository README</a>
+</div>
+
+</body>
+</html>
